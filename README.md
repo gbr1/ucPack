@@ -1,6 +1,6 @@
 # ucPack
 
-ucPack - Unified C++ Packeter
+ucPack - Unified C++ Packetizer
 
 ---
 
@@ -12,24 +12,23 @@ It is possible to use this library with Arduino or any other generic C++ framewo
 
 ```c++
 // declare ucPack class
-ucPack packeter(100,0x41,0x23);
+ucPack pack(100,0x41,0x23);
 
 // use the internal buffer
-packeter.buffer.push(<uint8_t value>);
+pack.buffer.push(<uint8_t value>);
 
 // to check if a correct message is arrived
-packeter.checkPayload();
+pack.checkPayload();
 
 
 // compose a byte + 4 float packet
-uint8_t size=packeter.packetC4F('C',1.23,-3.14,90.0,45.0);
-// now you can use packeter.msg as uint8_t *
+uint8_t size=pack.packetC4F('C',1.23,-3.14,90.0,45.0);
 
 
 // to unpack
 char c;
 float f1,f2,f3,f4;
-packeter.unpacketC4F(c, f1, f2, f3, f4);
+pack.unpacketC4F(c, f1, f2, f3, f4);
 
 ```
 
