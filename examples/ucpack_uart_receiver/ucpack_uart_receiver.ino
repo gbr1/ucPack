@@ -4,7 +4,7 @@
 ucPack packeter(210, 65, 35);
 
 void setup() {
-  Serial1.begin(115200, SERIAL_8E1);	// Expects 8bits, Even parity, 1 Stopbit
+  Serial1.begin(115200);
 }
 
 void loop() {
@@ -18,14 +18,16 @@ void loop() {
     Serial.println("got mail");
     uint8_t c = packeter.payloadTop();
 
-    if (c == 'E') {
+    switch (c)
+    {
+    case 'E':
       float timeout;
       packeter.unpacketC1F(c, timeout);
       Serial.print("Enable command received ");
       Serial.print("timeout=");
       Serial.println(timeout);
-    } 
-    else if (c == 'J') {
+      break;
+    case 'J':
       float f1, f2, f3, f4;
       packeter.unpacketC4F(c,f1,f2,f3,f4);
       Serial.print("Joint movement command received");
@@ -37,11 +39,11 @@ void loop() {
       Serial.print(f3);
       Serial.print(" f4=");
       Serial.println(f4);
-    }
-    else if (c == 'S') {
+      break;
+    case 'S':
       Serial.println("Stop command received");
-    }
-    else if (c == 'G') {
+      break;
+    case 'G':
       float f1, f2;
       packeter.unpacketC2F(c,f1,f2);
       Serial.print("IMU command received");
@@ -49,9 +51,10 @@ void loop() {
       Serial.print(f1);
       Serial.print(" f2=");
       Serial.println(f2);
-    }
-    else {
+      break;
+    default:
       Serial.println("Unknown command received");
+      break;
     }
 
   }

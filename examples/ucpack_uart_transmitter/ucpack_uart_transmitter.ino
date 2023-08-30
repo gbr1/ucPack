@@ -4,7 +4,7 @@ ucPack packeter(210, 65, 35);
 uint8_t msg_size;
 
 void setup() {
-  Serial1.begin(115200, SERIAL_8E1);	// 8bits, Even parity, 1 Stopbit
+  Serial1.begin(115200);
 }
 
 void loop() {
