@@ -49,6 +49,23 @@ class ucPack {
         uint8_t payloadTop();
         //uint8_t packetize(const char * types, const uint8_t n, ...); //put bytes in msg and return msg_size;
         
+        // Byte
+        uint8_t packetC1B(const uint8_t code, const uint8_t b);
+        void unpacketC1B(uint8_t &code, uint8_t &b);
+
+        uint8_t packetC3B(const uint8_t code, const uint8_t b1, const uint8_t b2, const uint8_t b3);
+        void unpacketC3B(uint8_t &code, uint8_t &b1, uint8_t &b2, uint8_t &b3);
+
+        // Int16
+        uint8_t packetC3I(const uint8_t code, const int16_t i1, const int16_t i2, const int16_t i3);
+        void unpacketC3I(uint8_t &code, int16_t &i1, int16_t &i2, int16_t &i3);
+
+        uint8_t packetC7I(const uint8_t code, const int16_t i1, const int16_t i2, const int16_t i3, const int16_t i4,
+                                              const int16_t i5, const int16_t i6, const int16_t i7);
+        void unpacketC7I(uint8_t &code, int16_t &i1, int16_t &i2, int16_t &i3, int16_t &i4,
+                                        int16_t &i5, int16_t &i6, int16_t &i7);
+
+        // Float
         uint8_t packetC1F(const uint8_t code, const float f);
         void unpacketC1F(uint8_t &code, float &f);
     
@@ -57,6 +74,11 @@ class ucPack {
             
         uint8_t packetC4F(const uint8_t code, const float f1, const float f2, const float f3, const float f4);
         void unpacketC4F(uint8_t &code, float &f1, float &f2, float &f3, float &f4);
+
+        uint8_t packetC6F(const uint8_t code, const float f1, const float f2, const float f3, const float f4,
+                                              const float f5, const float f6);
+        void unpacketC6F(uint8_t &code, float &f1, float &f2, float &f3, float &f4,
+                                        float &f5, float &f6);
     
         uint8_t packetC8F(const uint8_t code, const float f1, const float f2, const float f3, const float f4,
                                               const float f5, const float f6, const float f7, const float f8);

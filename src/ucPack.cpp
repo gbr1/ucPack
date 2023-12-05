@@ -142,6 +142,103 @@ uint8_t ucPack::packetize(const char *types, const uint8_t n, ...){
 }
  */
 
+
+// Byte
+
+uint8_t ucPack::packetC1B(const uint8_t code, const uint8_t b){
+    msg[0]=start_index;
+    msg[1]=2;
+    msg[2]=code;
+    msg[3]=b;
+    msg[4]=end_index;
+    msg[5]=crc8(msg+2,2);
+    msg_size=6;
+    return msg_size;
+}
+
+void ucPack::unpacketC1B(uint8_t &code, uint8_t &b){
+    code=payload[0];
+    b=payload[1];
+}
+
+uint8_t ucPack::packetC3B(const uint8_t code, const uint8_t b1, const uint8_t b2, const uint8_t b3){
+    msg[0]=start_index;
+    msg[1]=4;
+    msg[2]=code;
+    msg[3]=b1;
+    msg[4]=b2;
+    msg[5]=b3;
+    msg[6]=end_index;
+    msg[7]=crc8(msg+2,4);
+    msg_size=8;
+    return msg_size;
+}
+
+void ucPack::unpacketC3B(uint8_t &code, uint8_t &b1, uint8_t &b2, uint8_t &b3){
+    code=payload[0];
+    b1=payload[1];
+    b2=payload[2];
+    b3=payload[3];
+}
+
+
+
+// Int16
+
+uint8_t ucPack::packetC3I(const uint8_t code, const int16_t i1, const int16_t i2, const int16_t i3){
+    msg[0]=start_index;
+    msg[1]=7;
+    msg[2]=code;
+    memcpy(msg+3,&i1,sizeof(int16_t));
+    memcpy(msg+5,&i2,sizeof(int16_t));
+    memcpy(msg+7,&i3,sizeof(int16_t));
+    msg[9]=end_index;
+    msg[10]=crc8(msg+2,7);
+    msg_size=11;
+    return msg_size;
+}
+
+void ucPack::unpacketC3I(uint8_t &code, int16_t &i1, int16_t &i2, int16_t &i3){
+    code=payload[0];
+    memcpy(&i1, payload+1, sizeof(int16_t));
+    memcpy(&i2, payload+3, sizeof(int16_t));
+    memcpy(&i3, payload+5, sizeof(int16_t));
+}
+
+uint8_t ucPack::packetC7I(const uint8_t code, const int16_t i1, const int16_t i2, const int16_t i3, const int16_t i4,
+                                              const int16_t i5, const int16_t i6, const int16_t i7){
+    msg[0]=start_index;
+    msg[1]=15;
+    msg[2]=code;
+    memcpy(msg+3,&i1,sizeof(int16_t));
+    memcpy(msg+5,&i2,sizeof(int16_t));
+    memcpy(msg+7,&i3,sizeof(int16_t));
+    memcpy(msg+9,&i4,sizeof(int16_t));
+    memcpy(msg+11,&i5,sizeof(int16_t));
+    memcpy(msg+13,&i6,sizeof(int16_t));
+    memcpy(msg+15,&i7,sizeof(int16_t));
+    msg[17]=end_index;
+    msg[18]=crc8(msg+2,15);
+    msg_size=19;
+    return msg_size;
+}
+
+void ucPack::unpacketC7I(uint8_t &code, int16_t &i1, int16_t &i2, int16_t &i3, int16_t &i4,
+                                        int16_t &i5, int16_t &i6, int16_t &i7){
+    code=payload[0];
+    memcpy(&i1, payload+1, sizeof(int16_t));
+    memcpy(&i2, payload+3, sizeof(int16_t));
+    memcpy(&i3, payload+5, sizeof(int16_t));
+    memcpy(&i4, payload+7, sizeof(int16_t));
+    memcpy(&i5, payload+9, sizeof(int16_t));
+    memcpy(&i6, payload+11, sizeof(int16_t));
+    memcpy(&i7, payload+13, sizeof(int16_t));
+}
+
+
+
+// Float
+
 uint8_t ucPack::packetC1F(const uint8_t code, const float f){
     msg[0]=start_index;
     msg[1]=5;
@@ -196,6 +293,34 @@ void ucPack::unpacketC4F(uint8_t &code, float &f1, float &f2, float &f3, float &
     memcpy(&f2, payload+5, sizeof(float));
     memcpy(&f3, payload+9, sizeof(float));
     memcpy(&f4, payload+13, sizeof(float));
+}
+
+uint8_t ucPack::packetC6F(const uint8_t code, const float f1, const float f2, const float f3, const float f4,
+                                      const float f5, const float f6){
+    msg[0]=start_index;
+    msg[1]=25;
+    msg[2]=code;
+    memcpy(msg+3,&f1,sizeof(float));
+    memcpy(msg+7,&f2,sizeof(float));
+    memcpy(msg+11,&f3,sizeof(float));
+    memcpy(msg+15,&f4,sizeof(float));
+    memcpy(msg+19,&f5,sizeof(float));
+    memcpy(msg+23,&f6,sizeof(float));
+    msg[27]=end_index;
+    msg[28]=crc8(msg+2,25);
+    msg_size=29;
+    return msg_size;
+}
+
+void ucPack::unpacketC6F(uint8_t &code, float &f1, float &f2, float &f3, float &f4,
+                                float &f5, float &f6){
+    code=payload[0];
+    memcpy(&f1, payload+1, sizeof(float));
+    memcpy(&f2, payload+5, sizeof(float));
+    memcpy(&f3, payload+9, sizeof(float));
+    memcpy(&f4, payload+13, sizeof(float));
+    memcpy(&f5, payload+17, sizeof(float));
+    memcpy(&f6, payload+21, sizeof(float));
 }
 
 uint8_t ucPack::packetC8F(const uint8_t code,const float f1, const float f2, const float f3, const float f4,
