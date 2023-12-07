@@ -273,6 +273,26 @@ void ucPack::unpacketC2F(uint8_t &code, float &f1, float &f2){
     memcpy(&f2, payload+5, sizeof(float));
 }
 
+uint8_t ucPack::packetC3F(const uint8_t code, const float f1, const float f2, const float f3){
+    msg[0]=start_index;
+    msg[1]=13;
+    msg[2]=code;
+    memcpy(msg+3,&f1,sizeof(float));
+    memcpy(msg+7,&f2,sizeof(float));
+    memcpy(msg+11,&f3,sizeof(float));
+    msg[15]=end_index;
+    msg[16]=crc8(msg+2,13);
+    msg_size=17;
+    return msg_size;
+}
+
+void ucPack::unpacketC3F(uint8_t &code, float &f1, float &f2, float &f3){
+    code=payload[0];
+    memcpy(&f1, payload+1, sizeof(float));
+    memcpy(&f2, payload+5, sizeof(float));
+    memcpy(&f3, payload+9, sizeof(float));
+}
+
 uint8_t ucPack::packetC4F(const uint8_t code, const float f1, const float f2, const float f3, const float f4){
     msg[0]=start_index;
     msg[1]=17;

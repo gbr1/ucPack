@@ -70,7 +70,10 @@ class ucPack {
         void unpacketC1F(uint8_t &code, float &f);
     
         uint8_t packetC2F(const uint8_t code, const float f1, const float f2);
-        void unpacketC2F(uint8_t &code, float &f1, float &f2);    
+        void unpacketC2F(uint8_t &code, float &f1, float &f2);   
+
+        uint8_t packetC3F(const uint8_t code, const float f1, const float f2, const float f3);
+        void unpacketC3F(uint8_t &code, float &f1, float &f2, float &f3); 
             
         uint8_t packetC4F(const uint8_t code, const float f1, const float f2, const float f3, const float f4);
         void unpacketC4F(uint8_t &code, float &f1, float &f2, float &f3, float &f4);
