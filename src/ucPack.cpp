@@ -376,5 +376,29 @@ void ucPack::unpacketC8F(uint8_t &code, float &f1, float &f2, float &f3, float &
 }
 
 
+// Mixed types
+
+uint8_t ucPack::packetC1B3F(const uint8_t code, const uint8_t b, const float f1, const float f2, const float f3){
+    msg[0]=start_index;
+    msg[1]=14;
+    msg[2]=code;
+    msg[3]=b;
+    memcpy(msg+4,&f1,sizeof(float));
+    memcpy(msg+8,&f2,sizeof(float));
+    memcpy(msg+12,&f3,sizeof(float));
+    msg[16]=end_index;
+    msg[17]=crc8(msg+2,14);
+    msg_size=18;
+    return msg_size;
+}
+
+void ucPack::unpacketC1B3F(uint8_t &code, uint8_t &b, float &f1, float &f2, float &f3){
+    code=payload[0];
+    b=payload[1];
+    memcpy(&f1, payload+2, sizeof(float));
+    memcpy(&f2, payload+6, sizeof(float));
+    memcpy(&f3, payload+10, sizeof(float));
+}
+
 
 

@@ -87,6 +87,11 @@ class ucPack {
                                               const float f5, const float f6, const float f7, const float f8);
         void unpacketC8F(uint8_t &code, float &f1, float &f2, float &f3, float &f4,
                                         float &f5, float &f6, float &f7, float &f8);
+
+
+        // Mixed types
+        uint8_t packetC1B3F(const uint8_t code, const uint8_t b, const float f1, const float f2, const float f3);
+        void unpacketC1B3F(uint8_t &code, uint8_t &b, float &f1, float &f2, float &f3);
     
         ~ucPack();
 };
