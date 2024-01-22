@@ -93,6 +93,10 @@ class ucPack {
         uint8_t packetC1B3F(const uint8_t code, const uint8_t b, const float f1, const float f2, const float f3);
         void unpacketC1B3F(uint8_t &code, uint8_t &b, float &f1, float &f2, float &f3);
     
+        uint8_t packetC2B1F(const uint8_t code, const uint8_t b1, uint8_t b2, const float f);
+        void unpacketC2B1F(uint8_t &code, uint8_t &b1, uint8_t &b2, float &f);
+
+        
         ~ucPack();
 };
 
