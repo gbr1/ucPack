@@ -161,6 +161,24 @@ void ucPack::unpacketC1B(uint8_t &code, uint8_t &b){
     b=payload[1];
 }
 
+uint8_t ucPack::packetC2B(const uint8_t code, const uint8_t b1, const uint8_t b2){
+    msg[0]=start_index;
+    msg[1]=3;
+    msg[2]=code;
+    msg[3]=b1;
+    msg[4]=b2;
+    msg[5]=end_index;
+    msg[6]=crc8(msg+2,3);
+    msg_size=7;
+    return msg_size;
+}
+
+void ucPack::unpacketC2B(uint8_t &code, uint8_t &b1, uint8_t &b2){
+    code=payload[0];
+    b1=payload[1];
+    b2=payload[2];
+}
+
 uint8_t ucPack::packetC3B(const uint8_t code, const uint8_t b1, const uint8_t b2, const uint8_t b3){
     msg[0]=start_index;
     msg[1]=4;
@@ -402,7 +420,7 @@ void ucPack::unpacketC1B3F(uint8_t &code, uint8_t &b, float &f1, float &f2, floa
 
 uint8_t ucPack::packetC2B1F(const uint8_t code, const uint8_t b1, uint8_t b2, const float f){
     msg[0]=start_index;
-    msg[1]=14;
+    msg[1]=7;
     msg[2]=code;
     msg[3]=b1;
     msg[4]=b2;
