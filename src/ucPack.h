@@ -53,6 +53,9 @@ class ucPack {
         uint8_t packetC1B(const uint8_t code, const uint8_t b);
         void unpacketC1B(uint8_t &code, uint8_t &b);
 
+        uint8_t packetC2B(const uint8_t code, const uint8_t b1, const uint8_t b2);
+        void unpacketC2B(uint8_t &code, uint8_t &b1, uint8_t &b2);
+
         uint8_t packetC3B(const uint8_t code, const uint8_t b1, const uint8_t b2, const uint8_t b3);
         void unpacketC3B(uint8_t &code, uint8_t &b1, uint8_t &b2, uint8_t &b3);
 
