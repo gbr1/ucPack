@@ -253,6 +253,21 @@ void ucPack::unpacketC7I(uint8_t &code, int16_t &i1, int16_t &i2, int16_t &i3, i
     memcpy(&i7, payload+13, sizeof(int16_t));
 }
 
+uint8_t ucPack::packetC64I(const uint8_t code, const int16_t arr_i[64]){
+    msg[0]=start_index;
+    msg[1]=129;
+    msg[2]=code;
+    memcpy(msg+3,arr_i,64*sizeof(int16_t));
+    msg[131]=end_index;
+    msg[132]=crc8(msg+2,129);
+    msg_size=133;
+    return msg_size;
+}
+ 
+void ucPack::unpacketC64I(uint8_t &code, int16_t (&arr_i)[64]){
+    code=payload[0];
+    memcpy(arr_i, payload+1, 64*sizeof(int16_t));
+}
 
 
 // Float
