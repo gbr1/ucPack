@@ -68,6 +68,10 @@ class ucPack {
         void unpacketC7I(uint8_t &code, int16_t &i1, int16_t &i2, int16_t &i3, int16_t &i4,
                                         int16_t &i5, int16_t &i6, int16_t &i7);
 
+
+        uint8_t packetC64I(const uint8_t code, const int16_t arr_i[64]);
+        void unpacketC64I(uint8_t &code, int16_t (&arr_i)[64]);
+
         // Float
         uint8_t packetC1F(const uint8_t code, const float f);
         void unpacketC1F(uint8_t &code, float &f);
